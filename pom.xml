@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cn.wenhaha</groupId>
+  <artifactId>salesforce-data-plugin</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>salesforce-data-plugin</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.ejlchina</groupId>
+      <artifactId>okhttps</artifactId>
+      <version>3.4.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.ejlchina</groupId>
+      <artifactId>okhttps-jackson</artifactId>
+      <version>3.4.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>cn.wenhaha</groupId>
+      <artifactId>data-source</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.36.0.3</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+              <Plugin-Name>SF数据支持库</Plugin-Name>
+              <Plugin-Icon>https://cloud.wenhaha.cn/api/v3/file/source/1399/dd.png?sign=-d0miYO2B_Pm3hxhpOa5qf4mn54Trmi-a-8zjfdGjLI%3D%3A0</Plugin-Icon>
+              <Plugin-Id>SFRestApi</Plugin-Id>
+              <Plugin-Version>v0.2</Plugin-Version>
+              <Plugin-Add-Page>index.html</Plugin-Add-Page>
+              <Plugin-Update-Page>index.html#/update</Plugin-Update-Page>
+              <Plugin-Description>基于 Rest API v55.0 版本获取的token</Plugin-Description>
+              <Plugin-Provider>Luo Gen</Plugin-Provider>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>org/springframework/**</exclude>
+                    <exclude>org/slf4j/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <name>rdc-releases</name>
+      <id>rdc-releases</id>
+      <url>https://packages.aliyun.com/maven/repository/2184517-release-VmOaKG/</url>
+    </repository>
+    <snapshotRepository>
+      <id>rdc-snapshots</id>
+      <url>https://packages.aliyun.com/maven/repository/2184517-snapshot-Fy7CDW/</url>
+      <name>rdc-snapshots</name>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
